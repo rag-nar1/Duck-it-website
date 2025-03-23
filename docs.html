@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - TCP DuckDB Server</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Prism.js CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="logo.svg" alt="TCP DuckDB Server Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="docs.html">Documentation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/rag-nar1/TCP-Duckdb" target="_blank">GitHub</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Documentation Content -->
+    <div class="container my-5">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3">
+                <div class="doc-sidebar">
+                    <nav class="nav flex-column">
+                        <a class="nav-link active" href="#overview">Overview</a>
+                        <a class="nav-link" href="#installation">Installation</a>
+                        <a class="nav-link" href="#commands">Commands Reference</a>
+                        <a class="nav-link" href="#security">Security & Access Control</a>
+                        <a class="nav-link" href="#examples">Usage Examples</a>
+                        <a class="nav-link" href="#troubleshooting">Troubleshooting</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9">
+                <h1 id="overview">Overview</h1>
+                <p>TCP DuckDB Server is a robust TCP server implementation that enables remote management and interaction with DuckDB databases. Built with Go, it provides a secure and efficient way to execute SQL queries and manage databases over a network.</p>
+
+                <h2>Key Features</h2>
+                <ul>
+                    <li><strong>User Authentication:</strong> Secure login system with user management</li>
+                    <li><strong>Database Management:</strong> Create and manage multiple databases</li>
+                    <li><strong>Access Control:</strong> Granular permissions at database and table levels</li>
+                    <li><strong>PostgreSQL Integration:</strong> Link and migrate data from PostgreSQL databases</li>
+                    <li><strong>Transaction Support:</strong> ACID-compliant transaction management</li>
+                    <li><strong>Query Execution:</strong> Execute SQL queries with proper access control</li>
+                </ul>
+
+                <h1 id="installation">Installation</h1>
+                <p>Follow these steps to set up TCP DuckDB Server:</p>
+                
+                <h2>Prerequisites</h2>
+                <ul>
+                    <li>Go 1.16 or higher</li>
+                    <li>DuckDB installed on your system</li>
+                    <li>Git (for cloning the repository)</li>
+                </ul>
+
+                <h2>Installation Steps</h2>
+                <pre><code class="language-bash">git clone https://github.com/rag-nar1/TCP-Duckdb.git
+cd TCP-Duckdb
+go build</code></pre>
+
+                <h1 id="commands">Commands Reference</h1>
+                
+                <h2>Authentication</h2>
+                <h3>Login</h3>
+                <p>Authenticate to access the server:</p>
+                <pre><code class="language-bash">login [username] [password]</code></pre>
+                <p><strong>Parameters:</strong></p>
+                <ul>
+                    <li><code>[username]</code>: Your username</li>
+                    <li><code>[password]</code>: Your password</li>
+                </ul>
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-bash">login duck superpassword</code></pre>
+                <div class="alert alert-warning">
+                    <strong>Important:</strong> The super user is <code>duck</code> with default password <code>duck</code>. Change this password immediately after setup for security.
+                </div>
+
+                <h2>Database Management</h2>
+                <h3>Create Database</h3>
+                <pre><code class="language-bash">create database [database_name]</code></pre>
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-bash">create database mydb</code></pre>
+
+                <h3>Create User</h3>
+                <pre><code class="language-bash">create user [username] [password]</code></pre>
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-bash">create user john pass123</code></pre>
+
+                <h2>Database Operations</h2>
+                <h3>Connect</h3>
+                <pre><code class="language-bash">connect [database_name]</code></pre>
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-bash">connect mydb</code></pre>
+
+                <h3>Query Execution</h3>
+                <p>After connecting, you can execute SQL queries:</p>
+                <pre><code class="language-sql">SELECT * FROM table;</code></pre>
+
+                <h3>Transaction Management</h3>
+                <pre><code class="language-sql">start transaction
+INSERT INTO users VALUES (1, 'John');
+UPDATE users SET name = 'Johnny' WHERE id = 1;
+commit</code></pre>
+
+                <h2>Access Control</h2>
+                <h3>Grant Database Access</h3>
+                <pre><code class="language-bash">grant database [database_name] [username] [access_type]</code></pre>
+                <p><strong>Access Types:</strong> <code>read</code>, <code>write</code></p>
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-bash">grant database mydb john read</code></pre>
+
+                <h3>Grant Table Access</h3>
+                <pre><code class="language-bash">grant table [database_name] [table_name] [username] [access_type...]</code></pre>
+                <p><strong>Access Types:</strong> <code>select</code>, <code>update</code>, <code>insert</code>, <code>delete</code></p>
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-bash">grant table mydb users john select insert</code></pre>
+
+                <h2>PostgreSQL Integration</h2>
+                <h3>Link Database</h3>
+                <pre><code class="language-bash">link [database_name] [postgresql_connection_string]</code></pre>
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-bash">link mydb "postgresql://user:password@localhost:5432/pgdb"</code></pre>
+
+                <h3>Migrate Data</h3>
+                <pre><code class="language-bash">migrate [database_name]</code></pre>
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-bash">migrate mydb</code></pre>
+
+                <h1 id="security">Security and Access Control</h1>
+                <p>The server implements a comprehensive security model:</p>
+                <ul>
+                    <li>Only the super user <code>duck</code> can create databases and users</li>
+                    <li>Users can only access databases and tables they have been granted permissions for</li>
+                    <li>All operations are checked against the user's permissions</li>
+                    <li>Passwords are securely stored and verified</li>
+                </ul>
+
+                <h1 id="examples">Usage Examples</h1>
+                <p>Here's a complete example of setting up and using the server:</p>
+                <pre><code class="language-bash"># Login as super user
+login duck superpassword
+
+# Create a new database
+create database mydb
+
+# Create a regular user
+create user analyst pass123
+
+# Grant database access
+grant database mydb analyst read
+
+# Grant table access
+grant table mydb customers analyst select
+
+# Login as regular user
+login analyst pass123
+
+# Connect to database
+connect mydb
+
+# Execute query
+SELECT * FROM customers;</code></pre>
+
+                <h1 id="troubleshooting">Troubleshooting</h1>
+                <h2>Common Issues</h2>
+                <ul>
+                    <li><strong>Connection Issues:</strong> Check if the server is running and the port is accessible</li>
+                    <li><strong>Authentication Failures:</strong> Verify username and password, ensure proper permissions</li>
+                    <li><strong>Database Access:</strong> Confirm database exists and user has proper access rights</li>
+                    <li><strong>Query Errors:</strong> Check SQL syntax and table permissions</li>
+                </ul>
+
+                <h2>Best Practices</h2>
+                <ul>
+                    <li>Always change the default super user password after installation</li>
+                    <li>Grant minimum required permissions to users</li>
+                    <li>Use transactions for data consistency</li>
+                    <li>Regularly backup your databases</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p>&copy; 2024 TCP DuckDB Server. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <nav class="nav justify-content-center justify-content-md-end">
+                        <a class="nav-link" href="https://github.com/rag-nar1/TCP-Duckdb/blob/main/LICENSE" target="_blank">License</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Prism.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+</body>
+</html> 

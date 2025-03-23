@@ -1,0 +1,356 @@
+/* Import Roboto font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+:root {
+    --primary-bg: #000000;
+    --secondary-bg: #1A1A1A;
+    --primary-text: #FFFFFF;
+    --accent-color: #FFC107;
+    --code-keyword: #C678DD;
+    --code-string: #98C379;
+    --line-number: #666666;
+}
+
+/* Global Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--primary-bg);
+    padding: 10px 20px;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.logo-circle {
+    width: 20px;
+    height: 20px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+}
+
+.navbar-brand span {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary-text);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-link {
+    color: var(--primary-text) !important;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 16px;
+    position: relative;
+    text-decoration: none;
+}
+
+.nav-link::after {
+    content: '▼';
+    font-size: 8px;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+
+.github-stars {
+    color: var(--primary-text);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.github-stars i {
+    font-size: 18px;
+}
+
+.theme-toggle {
+    background: transparent;
+    border: none;
+    color: var(--primary-text);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.support-btn {
+    background-color: var(--accent-color);
+    color: var(--primary-text);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 120px 20px 50px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    gap: 30px;
+    align-items: center;
+}
+
+.hero-text h1 {
+    font-size: 48px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.hero-text h1 span {
+    font-weight: 700;
+}
+
+.hero-text h1 .highlight {
+    background-color: var(--accent-color);
+    padding: 0 10px;
+    border-radius: 4px;
+}
+
+.hero-text p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.hero-text p strong {
+    font-weight: 700;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--primary-text);
+    color: var(--primary-text);
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    border: none;
+    color: var(--primary-text);
+}
+
+/* Code Snippet */
+.code-snippet {
+    background-color: var(--secondary-bg);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.code-tabs {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+}
+
+.code-tab {
+    color: var(--primary-text);
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 0;
+}
+
+.code-tab.active {
+    border-bottom: 2px solid var(--primary-text);
+}
+
+.code-content {
+    font-family: 'Fira Code', monospace;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.code-line {
+    display: flex;
+    margin-bottom: 5px;
+}
+
+.line-number {
+    color: var(--line-number);
+    font-size: 12px;
+    margin-right: 15px;
+    user-select: none;
+}
+
+.code-keyword {
+    color: var(--code-keyword);
+}
+
+.code-string {
+    color: var(--code-string);
+}
+
+.code-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.code-actions .btn {
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+/* Features Section */
+.features-section {
+    padding: 50px 20px;
+}
+
+.section-title {
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.feature-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.feature-card {
+    background-color: var(--secondary-bg);
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+    width: 50px;
+    height: 50px;
+    background-color: var(--code-keyword);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.feature-icon i {
+    font-size: 24px;
+    color: var(--primary-text);
+}
+
+.feature-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .feature-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-text h1 {
+        font-size: 36px;
+    }
+    
+    .hero-text p {
+        font-size: 18px;
+    }
+    
+    .nav-links {
+        display: none;
+    }
+}
+
+/* Footer */
+.footer {
+    background-color: var(--secondary-bg);
+    padding: 20px;
+    margin-top: 50px;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.footer .nav-link {
+    font-size: 14px;
+    padding: 0 10px;
+}
+
+/* Hover Effects */
+.nav-link:hover,
+.btn:hover {
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.code-tab:hover {
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+} 
