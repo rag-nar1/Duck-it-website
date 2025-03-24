@@ -24,7 +24,7 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
       <GlobalStyles theme={isDarkTheme ? darkTheme : lightTheme} />
-      <BrowserRouter>
+      <BrowserRouter basename="/tcpDuckdbWeb">
         <Navbar toggleTheme={toggleTheme} isDarkTheme={isDarkTheme} />
         <Routes>
           <Route path="/" element={<Home />} />
