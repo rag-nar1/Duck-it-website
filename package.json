@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "DuckDB - Fast In-Process Database System",
   "type": "module",
-  "homepage": "https://yourusername.github.io/tcpDuckdbWeb",
+  "homepage": "https://rag-nar1.github.io/tcpDuckdbWeb",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
